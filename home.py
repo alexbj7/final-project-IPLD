@@ -4,7 +4,7 @@ import base64
     
 # ----- Page configs (tab title, favicon) -----
 st.set_page_config(
-    page_title="<Your Name> Portfolio",
+    page_title=" Alejandro's Portfolio",
     page_icon="📊",
 )
 
@@ -12,11 +12,11 @@ st.set_page_config(
 def home_page():
     # ----- Left menu -----
     with st.sidebar:
-        st.image("eae_img.png", width=200)
+        st.image("Alejandro.png", width=200)
         st.header("Introduction to Programming Languages for Data")
         st.write("###")
         st.write("***Final Project - Dec 2025***")
-        st.write("**Author:** <Your Name>")
+        st.write("**Author:** < alex blasco >")
         st.write("**Instructor:** [Enric Domingo](https://github.com/enricd)")
 
 
@@ -25,7 +25,7 @@ def home_page():
 
 
     # ----- Profile image file -----
-    profile_image_file_path = "profile.png"       # TODO: Upload your profile image to the same folder as this script and update this if it has a different name
+    profile_image_file_path = "Alejandro.png"       # TODO: Upload your profile image to the same folder as this script and update this if it has a different name
 
     with open(profile_image_file_path, "rb") as img_file:
         img = "data:image/png;base64," + base64.b64encode(img_file.read()).decode()
@@ -40,7 +40,7 @@ def home_page():
 
 
     # ----- Personal title or short description -----
-    current_role = "Current Role and/or Studies or Description"   # TODO: Change this
+    current_role = "Master Student of Big data and analytics Master"   # TODO: Change this
 
     st.html(f"""<div style="text-align: center;"><h4><i>{current_role}</i></h4></div>""")
 
@@ -52,19 +52,19 @@ def home_page():
 
     # TODO: Modify and adapt the following lines to your info, you can add or remove some details if you want
     st.write("""
-    - 🧑‍💻 I am a <Current Role and/or Studies> 
+    - 🧑‍💻 I am a Master Student of Big data and analytics Master
 
-    - 🛩️ prev: <Previous Experience, Background or Studies>
+    - 🛩️ previous experience: 1 year finance internship
 
-    - ❤️ <Your Passion and/or Interests>
+    - ❤️ I love music, traveling, sports and meeting new people. 
 
-    - 🤖 <Your Personal Projects>
+    - 🤖 My goal is to learn as much as possible and be able to use data in a way that is meaningful for businesses. 
 
-    - 🏂 <Your Hobbies>
+    - 🏂 Hobbies: Chess, photography and going out to try new restaurants.
 
-    - 📫 How to reach me: <Your Email>
+    - 📫 How to reach me: alejandroblasco90@gmail.com
 
-    - 🏠 Barcelona
+    - 🏠 Barcelona, Spain 
     """)
 
     # Feel free to add other points like your Linkedin, Github, Social Media, etc.

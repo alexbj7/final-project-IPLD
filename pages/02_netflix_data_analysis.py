@@ -129,8 +129,16 @@ movies_avg_duration_per_year = (
 
 if movies_avg_duration_per_year is not None:
     fig = plt.figure(figsize=(9, 6))
+    plt.plot(
+    movies_avg_duration_per_year.index,
+    movies_avg_duration_per_year.values)
+    plt.xlabel("Release Year")
+    plt.ylabel("Average Duration in minutes")
+    plt.title("Average Duration of Movies over the Years")
+    plt.show()
 
     # plt.plot(...# TODO: generate the line plot using plt.plot() and the information from movies_avg_duration_per_year (the vertical axes with the minutes value) and its index (the horizontal axes with the years)
+
 
     plt.title("Average Duration of Movies Across Years")
 

@@ -69,8 +69,6 @@ print(f"There are {n_countries} different countries in the data")
 
 # TODO: Ex 2.5: How many characters long are on average the title names?
 movies_df["title_length"] = movies_df["title"].apply(lambda x: len(x))
-
-
 avg_title_length = avg_title_length = movies_df["title_length"].mean()
 
 
@@ -99,8 +97,8 @@ year = cols2[0].number_input("Select a year:", min_year, max_year, 2005)
 # combined were made by every country, limit it to the top 10 countries.
 
 year = 2005
-top_10_countries = movies_df.loc[movies_df["release_year"] == year]
-top_10_countries = movies_df["country"].value_counts().head(10)
+top_10 = movies_df.loc[movies_df["release_year"] == year]
+top_10_countries = top_10["country"].value_counts().head(10)
 
 
 # print(top_10_countries)

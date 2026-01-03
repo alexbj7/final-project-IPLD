@@ -9,6 +9,7 @@ uploaded_file = st.file_uploader("Upload the Cities Temperatures CSV", type=["cs
 
 if uploaded_file is not None:
     temps_df = pd.read_csv(uploaded_file)
+    temps_df["Date"] = pd.to_datetime(temps_df["Date"]).dt.date
     st.success("✅ CSV loaded successfully!")
 else:
     st.warning("Please upload 'cities_temperatures.csv' to continue.")

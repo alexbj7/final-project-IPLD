@@ -103,9 +103,7 @@ if top_10_countries is not None:
     fig = plt.figure(figsize=(8, 8))
     plt.pie(top_10_countries, labels=top_10_countries.index, autopct="%.2f%%")
     plt.title(f"Top 10 Countries in {year}")
-
     st.pyplot(fig)
-
 else:
     st.subheader("⚠️ You still need to develop the Ex 2.6.")
 
@@ -125,7 +123,7 @@ movies_only_df["duration_min"] = movies_only_df["duration"].apply(
 movies_avg_duration_per_year = (
     movies_only_df.groupby("release_year")["duration_min"].mean()
 )
-
+# plt.plot(...# TODO: generate the line plot using plt.plot() and the information from movies_avg_duration_per_year (the vertical axes with the minutes value) and its index (the horizontal axes with the years)
 if movies_avg_duration_per_year is not None:
     fig = plt.figure(figsize=(9, 6))
     plt.plot(
@@ -134,15 +132,7 @@ if movies_avg_duration_per_year is not None:
     plt.xlabel("Release Year")
     plt.ylabel("Average Duration in minutes")
     plt.title("Average Duration of Movies over the Years")
-   
-
-    # plt.plot(...# TODO: generate the line plot using plt.plot() and the information from movies_avg_duration_per_year (the vertical axes with the minutes value) and its index (the horizontal axes with the years)
-
-
-    plt.title("Average Duration of Movies Across Years")
-
-    st.pyplot(fig)
-
+    st.pyplot(fig)    
 else:
     st.subheader("⚠️ You still need to develop the Ex 2.7.")
 

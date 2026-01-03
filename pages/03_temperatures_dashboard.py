@@ -24,7 +24,7 @@ st.divider()
 def load_data():
     data_path = "../data/cities_temperatures.csv"
 
-    temps_df = pd.read_csv(data_path)  # TODO: Ex 3.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
+    temps_df = pd.read_csv(data_path, index_col="show_id")  # TODO: Ex 3.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
 
     if temps_df is not None:
         temps_df["Date"] = pd.to_datetime(temps_df["Date"]).dt.date
@@ -128,18 +128,16 @@ if unique_countries_list is not None and len(selected_cities) > 0:
     # TODO: Ex 3.7: Plot the temperatures over time for the selected cities for the selected time period,
     # every city has to be its own line with a different color.
 
-    fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(figsize=(10, 5))
 
-    # for city in selected_cities:
-    #     city_df = None            # TODO
-    #     city_df_period = None     # TODO
-    #     plt.plot()                # TODO 
-    # plt.title()   # TODO
-    # plt.xlabel()  # TODO
-    # plt.ylabel()  # TODO
-
+for city in selected_cities:
+    city_df = temps_df[temps_df["City"] == city]      # TODO
+    city_df_period = city_df[(city_df["Date"] >= start_date) & (city_df["Date"] <= end_date)]   # TODO
+    plt.plot(city_df_period["Date"], city_df_period["AvgTemperatureCelsius"])                # TODO 
+    plt.title("Temperature over time")   # TODO
+    plt.xlabel("Date")  # TODO
+    plt.ylabel("Temperature in Celsius")  # TODO
     plt.legend()
-    
     c.pyplot(fig)
 
 
@@ -147,21 +145,17 @@ if unique_countries_list is not None and len(selected_cities) > 0:
     # TODO: Make a histogram of the temperature reads of a list of selected cities, for the selected time period, 
     # every city has to be its own distribution with a different color.
 
-    fig = plt.figure(figsize=(10, 5))
+    fig2 = plt.figure(figsize=(10, 5))
 
-    # for city in selected_cities:
-    #     city_df = None            # TODO
-    #     city_df_period = None     # TODO
-    #     plt.hist()                # TODO
-
-    # plt.title()   # TODO
-    # plt.xlabel()  # TODO
-    # plt.ylabel()  # TODO
-
-    plt.legend()
-
-    c.pyplot(fig)
-
+    for city in selected_cities:
+        city_df = temps_df[temps_df["City"] == city]      # TODO
+        city_df_period = city_df[(city_df["Date"] >= start_date) & (city_df["Date"] <= end_date)]   # TODO
+        plt.hist(city_df_period["AvgTemperatureCelsius"], label=city)                # TODO
+        plt.title("Temperature distribution")   # TODO
+        plt.xlabel("Temperature in Celsius")  # TODO
+        plt.ylabel("Frequency")  # TODO
+        plt.legend()
+        c.pyplot(fig2)
 
 
 

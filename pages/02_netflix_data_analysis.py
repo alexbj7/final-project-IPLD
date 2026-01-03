@@ -24,7 +24,7 @@ st.divider()
 def load_data():
     data_path = "data/netflix_titles.csv"
 
-    movies_df = None  # TODO: Ex 2.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
+    movies_df = pd.read_csv(data_path, index_col="show_id")  # TODO: Ex 2.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
 
     return movies_df   # a Pandas DataFrame
 
@@ -39,17 +39,39 @@ with st.expander("Check the complete dataset:"):
 # ----- Extracting some basic information from the dataset -----
 
 # TODO: Ex 2.2: What is the min and max release years?
-min_year = None
-max_year = None
+min_year = movies_df["release_year"].min()
+max_year = movies_df["release_year"].max()
+
 
 # TODO: Ex 2.3: How many director names are missing values (NaN)?
-num_missing_directors = None
+num_missing_directors = movies_df["director"].isna().sum()
 
 # TODO: Ex 2.4: How many different countries are there in the data?
-n_countries = None
+
+countries_filled = movies_df["country"].fillna("Unknown")
+
+all_countries = []
+for country in countries_filled:
+    split_countries = country.split(", ")
+    all_countries.extend(split_countries)
+
+# Convert the list to a pd.series. 
+countries_series = pd.Series(all_countries)
+
+# Get the unique countries using .unique() so as to not count the same country twice.
+unique_countries = countries_series.unique()
+
+# Count the number of unique countries in the dataset 
+n_countries = len(unique_countries)
+
+print(f"There are {n_countries} different countries in the data")
+
 
 # TODO: Ex 2.5: How many characters long are on average the title names?
-avg_title_length = None
+movies_df["title_length"] = movies_df["title"].apply(lambda x: len(x))
+
+
+avg_title_length = avg_title_length = movies_df["title_length"].mean()
 
 
 # ----- Displaying the extracted information metrics -----
@@ -75,7 +97,11 @@ year = cols2[0].number_input("Select a year:", min_year, max_year, 2005)
 
 # TODO: Ex 2.6: For a given year, get the Pandas Series of how many movies and series 
 # combined were made by every country, limit it to the top 10 countries.
-top_10_countries = None
+
+year = 2005
+top_10_countries = movies_df.loc[movies_df["release_year"] == year]
+top_10_countries = movies_df["country"].value_counts().head(10)
+
 
 # print(top_10_countries)
 if top_10_countries is not None:
@@ -95,7 +121,15 @@ st.write("##")
 st.header("Avg Duration of Movies by Year")
 
 # TODO: Ex 2.7: Make a line chart of the average duration of movies (not TV shows) in minutes for every year across all the years. 
-movies_avg_duration_per_year = None
+movies_df = movies_df[movies_df["type"] == "Movie"]
+
+movies_df["duration_min"] = movies_df["duration"].apply(
+    lambda x: int(x.replace("min", ""))
+)
+
+movies_avg_duration_per_year = (
+    movies_df.groupby("release_year")["duration_min"].mean()
+)
 
 if movies_avg_duration_per_year is not None:
     fig = plt.figure(figsize=(9, 6))

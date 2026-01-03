@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 uploaded_file = st.file_uploader("Upload the Netflix CSV", type=["csv"])
-
+# I have used st.file_uploader to allow the user to upload the dataset since before, I was unable to open the file directkly with the code that was provided.
+#I asked a friend that knows about programming to find an alternative way of uploading the file into streamlit. 
+#otherwise, streamlit app would also be doing errors when trying to open the file directly from the path.
 if uploaded_file is not None:
     movies_df = pd.read_csv(uploaded_file, index_col="show_id")
     st.success("✅ CSV loaded successfully!")

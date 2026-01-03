@@ -5,7 +5,14 @@ import matplotlib.pyplot as plt
 # Some extra libraries for date conversions and build the webapp
 import streamlit as st
 
+uploaded_file = st.file_uploader("Upload the Cities Temperatures CSV", type=["csv"])
 
+if uploaded_file is not None:
+    temps_df = pd.read_csv(uploaded_file, index_col="show_id")
+    st.success("✅ CSV loaded successfully!")
+else:
+    st.warning("Please upload 'cities_temperatures.csv' to continue.")
+    st.stop()  # stop the app until the file is uploaded
 
 # ----- Left menu -----
 with st.sidebar:
@@ -21,18 +28,6 @@ st.divider()
 
 # ----- Loading the dataset -----
 
-@st.cache_data
-def load_data():
-    data_path = "cities_temperatures.csv"
-
-    temps_df = pd.read_csv(data_path, index_col="show_id")  # TODO: Ex 3.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
-
-    if temps_df is not None:
-        temps_df["Date"] = pd.to_datetime(temps_df["Date"]).dt.date
-
-    return temps_df  # a Pandas DataFrame
-
-temps_df = load_data()
 
 # Displaying the dataset in a expandable table
 with st.expander("Check the complete dataset:"):

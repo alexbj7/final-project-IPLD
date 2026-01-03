@@ -31,7 +31,6 @@ def load_data():
 
     return temps_df  # a Pandas DataFrame
 
-
 temps_df = load_data()
 
 # Displaying the dataset in a expandable table

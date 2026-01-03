@@ -5,6 +5,15 @@ import matplotlib.pyplot as plt
 # Some extra libraries to build the webapp
 import streamlit as st
 
+uploaded_file = st.file_uploader("Upload the Netflix CSV", type=["csv"])
+
+if uploaded_file is not None:
+    movies_df = pd.read_csv(uploaded_file, index_col="show_id")
+    st.success("✅ CSV loaded successfully!")
+    st.dataframe(movies_df.head())
+else:
+    st.warning("Please upload 'netflix_titles.csv' to continue.")
+    st.stop()
 
 # ----- Left menu -----
 with st.sidebar:
@@ -20,15 +29,7 @@ st.divider()
 
 # ----- Loading the dataset -----
 
-@st.cache_data
-def load_data():
-    data_path = "netflix_titles.csv"
-    movies_df = pd.read_csv(data_path, index_col="show_id")
 
-    return movies_df   # a Pandas DataFrame
-
-
-movies_df = load_data()
 
 # Displaying the dataset in a expandable table
 with st.expander("Check the complete dataset:"):

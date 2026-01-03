@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 
+
 # ----- Left menu -----
 with st.sidebar:
     st.image("eae_img.png", width=200)
